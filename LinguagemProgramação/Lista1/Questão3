@@ -1,0 +1,37 @@
+import java.util.Scanner;
+
+public class Questão3 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        int[] numeros = new int[10];
+        
+        System.out.println("Digite 10 números inteiros:");
+        for (int i = 0; i < 10; i++) {
+            System.out.print("Número " + (i + 1) + ": ");
+            numeros[i] = scanner.nextInt();
+        }
+        
+        double mediaPrimeiros5 = calcularMedia(numeros, 0, 4);
+
+        double mediaUltimos5 = calcularMedia(numeros, 5, 9);
+        
+        double somaDasMedias = mediaPrimeiros5 + mediaUltimos5;
+        System.out.println("Soma das duas médias: " + somaDasMedias);
+        
+        double maiorMedia = Math.max(mediaPrimeiros5, mediaUltimos5);
+        System.out.println("Maior média: " + maiorMedia);
+        
+        double mediaDasMedias = (mediaPrimeiros5 + mediaUltimos5) / 2.0;
+        System.out.println("Média das duas médias: " + mediaDasMedias);
+        
+    }
+    
+    public static double calcularMedia(int[] numeros, int inicio, int fim) {
+        int soma = 0;
+        for (int i = inicio; i <= fim; i++) {
+            soma += numeros[i];
+        }
+        return (double) soma / (fim - inicio + 1);
+    }
+}
