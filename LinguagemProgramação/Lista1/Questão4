@@ -1,0 +1,23 @@
+import java.util.Scanner;
+
+public class Questão4 {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        
+        System.out.print("Digite o primeiro número: ");
+        int numero1 = scanner.nextInt();
+        
+        System.out.print("Digite o segundo número: ");
+        int numero2 = scanner.nextInt();
+       
+        if (numero1 > numero2) {
+            int aux = numero1;
+            numero1 = numero2;
+            numero2 = aux;
+        }
+        
+        for (int i = numero1 + 1; i < numero2; i++) {
+            System.out.print(i);
+        }
+    }
+}
