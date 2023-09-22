@@ -1,0 +1,137 @@
+package Apliccation;
+
+import java.util.Scanner;
+
+public class Menu {
+	
+	static Scanner scanner = new Scanner(System.in);
+	static Controle controle = new Controle();
+	
+	public static void main(String[] args) {
+	
+	
+	int op = 0;
+	
+		while(op > 0 || op < 5){
+		System.out.println("| ------------ MENU ------------|");
+		System.out.println("| 1. Incluir Produto            |");
+		System.out.println("|-------------------------------|");
+		System.out.println("| 2. Incluir Pedido             |");
+		System.out.println("|-------------------------------|");
+		System.out.println("| 3. Consultar Pedido           |");
+		System.out.println("|-------------------------------|");
+		System.out.println("| 4. Sair                       |");
+		System.out.println("|-------------------------------|");
+		System.out.println("Selecione uma das opcoes acima: ");
+		op = scanner.nextInt();
+		
+		switch(op) {
+		case 1: 
+		
+			incluirProduto();
+			break;
+			
+		case 2:
+			
+			incluirPedido();
+			break;
+			
+		case 3:
+			
+			consultarPedido();
+			break;
+			
+		case 4:
+			
+			System.out.println("Programa finalizado!");
+			System.exit(0);
+		default:
+			
+			System.out.println("Opcao Inválida. Tente novamente!!");
+		}
+		};
+		
+		
+
+}
+	public static void incluirProduto() {
+	
+		int codigo;
+		Produto iProduto = new Produto(); 
+		System.out.println("Digite o codigo do produto: ");
+		codigo = scanner.nextInt();
+		
+		if(!controle.existeCodigoProduto(codigo)){
+			
+			iProduto.setCodigo(codigo);
+			System.out.println("Digite o nome do produto: ");
+			iProduto.setNome(scanner.next());
+			System.out.println("Digite o preco do produto: ");
+			iProduto.setPreco(scanner.nextDouble());
+			controle.getaProduto().add(iProduto);
+		}
+		
+		else {
+			System.out.println("Codigo de produto ja existente!");
+		}
+		
+	}
+	
+	public static void incluirPedido() {
+		
+		Pedido iPedido = new Pedido();
+		int codigo, op = 1234;
+		System.out.println("Digite o codigo: ");
+		codigo = scanner.nextInt();
+		
+		if(!controle.existeCodigoPedido(codigo)) {
+			
+			iPedido.setCodigo(codigo);
+			System.out.println("Digite a descricao do pedido: ");
+			iPedido.setDescricao(scanner.next());
+			
+			while(op != 0) {
+				
+				System.out.println("1. Digite o codigo do produto para inserir no pedido: ");
+				codigo = scanner.nextInt();
+				
+				if(controle.existeCodigoProduto(codigo)) {
+					Produto produto;
+					produto = controle.retornaProduto(codigo);
+					iPedido.getLista().add(produto);
+				}
+				else {
+					System.out.println("Produto ja existente!");
+				}
+				System.out.println("Deseja incluir mais algum produtos? (1 = Sim / 0= Nao)");
+				op = scanner.nextInt();
+			}
+			controle.getaPedido().add(iPedido);
+		}
+		else {
+			System.out.println("Codigo de pedido ja existente!");
+		}
+	}
+	
+	public static void consultarPedido() {
+		
+		int codigo;
+		System.out.println("Digite o codigo do pedido: ");
+		codigo = scanner.nextInt();
+		
+		if (controle.existeCodigoPedido(codigo)) {
+			
+			Pedido pedido;
+			pedido = controle.retornaPedido(codigo);
+			System.out.println(pedido);
+			
+			for(Produto i: pedido.getLista()) {
+			
+				System.out.println(i);
+			}
+			System.out.println(pedido.obterValorTotal());
+		}
+		
+	}
+	
+}
