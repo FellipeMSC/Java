@@ -1,0 +1,65 @@
+package Apliccation;
+import java.util.ArrayList;
+
+public class Controle {
+
+	private ArrayList<Pedido> aPedido = new ArrayList <>();
+	private ArrayList<Produto> aProduto = new ArrayList <>();
+	
+	public ArrayList<Pedido> getaPedido() {
+		return aPedido;
+	}
+	public void setaPedido(ArrayList<Pedido> aPedido) {
+		this.aPedido = aPedido;
+	}
+	public ArrayList<Produto> getaProduto() {
+		return aProduto;
+	}
+	public void setaProduto(ArrayList<Produto> aProduto) {
+		this.aProduto = aProduto;
+	}
+	
+	public boolean existeCodigoPedido(int codigo) {
+		
+		for(Pedido i: aPedido) {
+			
+			if (codigo == i.getCodigo()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public boolean existeCodigoProduto(int codigo) {
+		
+		for(Produto i: aProduto) {
+			
+			if(codigo == i.getCodigo()) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public Produto retornaProduto(int codigo) {
+			
+		for(Produto i: aProduto) {
+			
+			if(codigo == i.getCodigo()) {
+				return i;
+			}
+		}
+		return null;
+	}
+	
+	public Pedido retornaPedido(int codigo) {
+		
+		for(Pedido i: aPedido) {
+			
+			if (codigo == i.getCodigo()) {
+				return i;
+			}
+		}
+		return null;
+	}
+}
